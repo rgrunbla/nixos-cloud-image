@@ -15,8 +15,9 @@
             [ ./images/configuration.nix ./images/hardware-configuration.nix ];
         }).config;
         format = "qcow2";
-        diskSize = 2048;
+        diskSize = 32000;
         name = "base-image";
+        partitionTableType = "efi";
       };
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.nixos-cloud-image;
     };

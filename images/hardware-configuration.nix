@@ -12,8 +12,8 @@
   };
 
   boot = {
+    kernelParams = [ "console=ttyS0" ];
     growPartition = true;
-
     loader.grub = {
       version = 2;
       device = "nodev";
@@ -26,8 +26,26 @@
         terminal_input serial
       '';
     };
-
-    kernelParams = [ "console=tty1" "console=ttyS0,115200" ];
-
+     initrd = {
+        network.enable = false;
+        availableKernelModules = [
+          "virtio_net"
+          "virtio_pci"
+          "virtio_mmio"
+          "virtio_blk"
+          "virtio_scsi"
+          "kvm-amd"
+          "kvm-intel"
+          "xhci_pci"
+          "ehci_pci"
+          "ahci"
+          "usbhid"
+          "usb_storage"
+          "sd_mod"
+          "9p"
+          "9pnet"
+          "9pnet_virtio"
+        ];
+      };
   };
 }
