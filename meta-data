@@ -1,0 +1,2 @@
+instance-id: nixos-cloud-image
+local-hostname: nixos-cloud-image

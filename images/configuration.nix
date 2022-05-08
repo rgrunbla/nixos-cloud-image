@@ -1,6 +1,12 @@
 { config, pkgs, lib, options, fetchurl, ... }:
 
 {
+  imports =
+    [
+      ./hardware-configuration.nix
+      ./machine-configuration.nix
+    ];
+
   # Mount tmpfs on /tmp
   boot.tmpOnTmpfs = lib.mkDefault true;
 
@@ -45,7 +51,7 @@
 
   # Enable the firewall
   networking = {
-    useDHCP = false;
+    useDHCP = true;
     usePredictableInterfaceNames = false;
     firewall = {
       enable = true;
