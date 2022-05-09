@@ -4,7 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./machine-configuration.nix
+      ./machine/machine-configuration.nix
     ];
 
   # Mount tmpfs on /tmp

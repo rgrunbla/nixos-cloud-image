@@ -17,6 +17,7 @@
               [
                 ./images/configuration.nix
                 ./images/hardware-configuration.nix
+                ./images/machine/machine-configuration.nix
               ];
           }).config;
           format = "qcow2";
@@ -33,6 +34,10 @@
               source = ./images/hardware-configuration.nix;
               target = "/etc/nixos/hardware-configuration.nix";
             }
+            {
+              source = ./images/machine/machine-configuration.nix;
+              target = "/etc/nixos/machine/machine-configuration.nix";
+            }
           ];
         };
       packages.x86_64-linux.nixos-cloud-image-configuration = stdenv.mkDerivation {
@@ -41,9 +46,7 @@
         buildPhase = "";
         installPhase = ''
           mkdir -p $out
-          install -t $out ./images/configuration.nix
-          install -t $out ./images/hardware-configuration.nix
-          install -t $out ./images/machine-configuration.nix
+          cp -r ./images/* $out
         '';
       };
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.nixos-cloud-image;
