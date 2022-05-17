@@ -1,7 +1,7 @@
 {
   description = "A NixOS ready-to-use cloud image.";
 
-  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11"; };
+  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
   outputs = { self, nixpkgs }:
     with import nixpkgs { system = "x86_64-linux"; }; {
