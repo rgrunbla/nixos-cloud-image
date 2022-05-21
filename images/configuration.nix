@@ -64,7 +64,7 @@
 
   # Enable Cloud Init
   services.cloud-init = {
-    enable = true;
+    enable = lib.mkDefault true;
     network.enable = true;
 
     # This is the default where we remove        cloud_init_modules: - users-groups - update_etc_hosts
