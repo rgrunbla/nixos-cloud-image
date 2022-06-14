@@ -123,4 +123,16 @@
 
   # Root Password is "root"
   users.users.root.password = "root";
+
+
+  # Automatic upgrades, once a day, with possible reboots
+  system.autoUpgrade = {
+    randomizedDelaySec = "45min";
+    enable = true;
+    allowReboot = true;
+    rebootWindow = {
+      lower = "03:00";
+      upper = "05:00";
+    };
+  };
 }
