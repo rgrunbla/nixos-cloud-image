@@ -22,6 +22,7 @@
           }).config;
           format = "qcow2";
           diskSize = 32000;
+          bootSize = 1024;
           name = "base-image";
           partitionTableType = "efi";
           copyChannel = false;
