@@ -116,13 +116,13 @@
 
   # SSH
   services.sshd.enable = true;
-  services.openssh = { passwordAuthentication = false; };
+  services.openssh = { passwordAuthentication = lib.mkDefault false; };
 
   # compatible NixOS release
   system.stateVersion = "21.11";
 
   # Root Password is "root"
-  users.users.root.password = "root";
+  users.users.root.password = lib.mkDefault "root";
 
 
   # Automatic upgrades, once a day, with possible reboots
