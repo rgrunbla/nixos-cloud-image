@@ -128,7 +128,7 @@
   # Automatic upgrades, once a day, with possible reboots
   system.autoUpgrade = {
     randomizedDelaySec = "45min";
-    enable = true;
+    enable = lib.mkDefault true;
     allowReboot = true;
     rebootWindow = {
       lower = "03:00";
