@@ -14,10 +14,10 @@
   environment.systemPackages = with pkgs; [ ncdu ];
 
   # Allow proxmox to reboot the images
-  services.acpid.enable = true;
+  services.acpid.enable = lib.mkDefault true;
 
   # Enable Qemu Agent
-  services.qemuGuest.enable = true;
+  services.qemuGuest.enable = lib.mkDefault true;
 
   # Enable the serial console on ttyS0
   systemd.services."serial-getty@ttyS0".enable = true;
@@ -27,30 +27,30 @@
   # e.g. wireless modules, drivers, firmwares, ethernet drivers, …
 
   ## Remove Xlibs
-  environment.noXlibs = true;
+  environment.noXlibs = lib.mkDefault true;
 
   ## Limit the locales we use
   i18n.supportedLocales = [ (config.i18n.defaultLocale + "/UTF-8") ];
 
   ## Remove polkit. It depends on spidermonkey !
-  security.polkit.enable = false;
+  security.polkit.enable = lib.mkDefault false;
 
   ## Remove documentation
-  documentation.enable = false;
-  documentation.nixos.enable = false;
-  documentation.man.enable = false;
-  documentation.info.enable = false;
-  documentation.doc.enable = false;
+  documentation.enable = lib.mkDefault false;
+  documentation.nixos.enable = lib.mkDefault false;
+  documentation.man.enable = lib.mkDefault false;
+  documentation.info.enable = lib.mkDefault false;
+  documentation.doc.enable = lib.mkDefault false;
 
   ## Disable udisks, sounds, …
-  services.udisks2.enable = false;
-  xdg.sounds.enable = false;
+  services.udisks2.enable = lib.mkDefault false;
+  xdg.sounds.enable = lib.mkDefault false;
 
   ## Optimize store
-  nix.autoOptimiseStore = true;
+  nix.autoOptimiseStore = lib.mkDefault true;
 
   # Enable time sync
-  services.timesyncd.enable = true;
+  services.timesyncd.enable = lib.mkDefault true;
 
   # Enable the firewall
   networking = {
