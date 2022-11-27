@@ -27,7 +27,8 @@
   # e.g. wireless modules, drivers, firmwares, ethernet drivers, …
 
   ## Remove Xlibs
-  environment.noXlibs = lib.mkDefault true;
+  ## Problem : triggers the rebuild of qemu* which takes one hour or so
+  # environment.noXlibs = lib.mkDefault true;
 
   ## Limit the locales we use
   i18n.supportedLocales = [ (config.i18n.defaultLocale + "/UTF-8") ];
@@ -47,7 +48,9 @@
   xdg.sounds.enable = lib.mkDefault false;
 
   ## Optimize store
-  nix.autoOptimiseStore = lib.mkDefault true;
+  nix.settings = {
+    auto-optimise-store = lib.mkDefault true;
+  };
 
   # Enable time sync
   services.timesyncd.enable = lib.mkDefault true;
@@ -66,52 +69,6 @@
   services.cloud-init = {
     enable = lib.mkDefault true;
     network.enable = true;
-
-    # This is the default where we remove        cloud_init_modules: - users-groups - update_etc_hosts
-    config = ''
-      system_info:
-        distro: nixos
-        network:
-          renderers: [ 'networkd' ]
-      users:
-         - root
-
-      disable_root: false
-      preserve_hostname: false
-
-      cloud_init_modules:
-       - migrator
-       - seed_random
-       - bootcmd
-       - write-files
-       - growpart
-       - resizefs
-       - ca-certs
-       - rsyslog
-
-      cloud_config_modules:
-       - disk_setup
-       - mounts
-       - ssh-import-id
-       - set-passwords
-       - timezone
-       - disable-ec2-metadata
-       - runcmd
-       - ssh
-
-      cloud_final_modules:
-       - rightscale_userdata
-       - scripts-vendor
-       - scripts-per-once
-       - scripts-per-boot
-       - scripts-per-instance
-       - scripts-user
-       - ssh-authkey-fingerprints
-       - keys-to-console
-       - phone-home
-       - final-message
-       - power-state-change
-    '';
   };
 
   # SSH
@@ -119,20 +76,8 @@
   services.openssh = { passwordAuthentication = lib.mkDefault false; };
 
   # compatible NixOS release
-  system.stateVersion = "21.11";
+  system.stateVersion = "22.11";
 
   # Root Password is "root"
   users.users.root.password = lib.mkDefault "root";
-
-
-  # Automatic upgrades, once a day, with possible reboots
-  system.autoUpgrade = {
-    randomizedDelaySec = "45min";
-    enable = lib.mkDefault true;
-    allowReboot = true;
-    rebootWindow = {
-      lower = "03:00";
-      upper = "05:00";
-    };
-  };
 }

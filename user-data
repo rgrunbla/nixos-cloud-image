@@ -1,3 +1,6 @@
 #cloud-config
  ssh_authorized_keys:
- - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDwZm6kUsK/FrgJPzFi5AgvqIIYfy5S/Se4/rZgB4Edx remy@typhoon
+ - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDk8/E5i2xEXZYIpm5RsGSiaVos/13T7f4iJpgTw8Ppz remy@typhoon
+ users:
+ - name: root
+   lock_passwd: false # By default the root password is locked
