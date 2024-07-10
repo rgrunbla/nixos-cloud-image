@@ -73,10 +73,10 @@
 
   # SSH
   services.sshd.enable = true;
-  services.openssh = { passwordAuthentication = lib.mkDefault false; };
+  services.openssh.settings = { PasswordAuthentication = lib.mkDefault false; };
 
   # compatible NixOS release
-  system.stateVersion = "22.11";
+  system.stateVersion = "24.05";
 
   # Root Password is "root"
   users.users.root.password = lib.mkDefault "root";

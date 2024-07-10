@@ -15,7 +15,6 @@
     kernelParams = [ "console=ttyS0" ];
     growPartition = true;
     loader.grub = {
-      version = 2;
       device = "nodev";
       efiSupport = true;
       efiInstallAsRemovable = true;
