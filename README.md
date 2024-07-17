@@ -29,3 +29,7 @@ sudo qm set 9000 --bios ovmf
 sudo qm set 9000 -scsi1 local:cloudinit
 sudo qm template 9000
 ```
+
+## First nixos-rebuild
+
+Before being able to `nixos-rebuild`, as `copyChannel` is set to `false` in the `flake.nix` file, you have to `nix-channel --update`.

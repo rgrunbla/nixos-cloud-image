@@ -57,22 +57,37 @@
 
   # Enable the firewall
   networking = {
-    useDHCP = false; # We will use cloud init configuration for networking
-    usePredictableInterfaceNames = false;
+    useDHCP = lib.mkDefault false; # We will use cloud init configuration for networking
+    usePredictableInterfaceNames = lib.mkDefault false;
     firewall = {
-      enable = true;
+      enable = lib.mkDefault true;
       allowedTCPPorts = [ 22 ];
     };
+  };
+
+  # Enable flakes
+  nix = {
+    extraOptions = lib.mkDefault ''
+      experimental-features = nix-command flakes
+      builders-use-substitutes = true
+    '';
+
+    # Ensure the NIX_PATH Variable is set up correctly
+    nixPath = lib.mkDefault [
+      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+      "nixos-config=/etc/nixos/configuration.nix"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
   };
 
   # Enable Cloud Init
   services.cloud-init = {
     enable = lib.mkDefault true;
-    network.enable = true;
+    network.enable = lib.mkDefault true;
   };
 
   # SSH
-  services.sshd.enable = true;
+  services.sshd.enable = lib.mkDefault true;
   services.openssh.settings = { PasswordAuthentication = lib.mkDefault false; };
 
   # compatible NixOS release
