@@ -1,0 +1,18 @@
+name: "Build Image"
+on:
+  pull_request:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v27
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - run: nix build
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nixos-cloud-image.qcow2
+        path: nixos.qcow2
